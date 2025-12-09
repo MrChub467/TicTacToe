@@ -1,0 +1,18 @@
+// Variables and Imports
+@use "/src/assets/variables";
+
+// Override Bootstrap theme variables
+$primary: variables.$DarkBlue;
+$secondary: variables.$SecondaryBlue;
+$info: variables.$AccentBlue;
+$danger: variables.$MainRed;
+
+#root {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100vh;
+}
+
+// Import Bootstrap after variable overrides
+@import "bootstrap/scss/bootstrap";
