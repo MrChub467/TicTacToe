@@ -4,9 +4,10 @@ import matchMakingRoute from "../controllers/matchMakingRoute";
 import lobbyRoute from "../controllers/lobbyRoute";
 
 function appRoutes(app: Application) {
-  app.use("/test", testRoute);
-  app.use("/matchmaking", matchMakingRoute);
-  app.use("/lobby", lobbyRoute);
+  const forerunner = "/api";
+  app.use(`${forerunner}/test`, testRoute);
+  app.use(`${forerunner}/matchmaking`, matchMakingRoute);
+  app.use(`${forerunner}/lobby`, lobbyRoute);
 }
 
 export default appRoutes;

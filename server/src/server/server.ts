@@ -8,6 +8,10 @@ import appRoutes from "./routes/routes";
 import cors from "cors";
 import { CustomError, NotFoundException } from "~/config/error.core";
 import HTTP_STATUS from "~/config/httpStatus";
+import { connectToDatabase } from "./config/dbConnection";
+import dotenv from "dotenv";
+import { GameRecord } from "./models/game";
+dotenv.config();
 
 class Server {
   private app: Application;
@@ -19,8 +23,8 @@ class Server {
     this.setupMiddleware();
     this.setupRoutes();
     this.setupGlobalError();
+    this.setupDatabase();
     this.listenServer();
-    // this.setupDatabase();
   }
 
   private setupRoutes() {
@@ -62,6 +66,15 @@ class Server {
         });
       },
     );
+  }
+
+  private setupDatabase() {
+    try {
+      connectToDatabase(process.env.MONGODB_URI ?? "");
+      console.log("Connected to DB");
+    } catch (error) {
+      console.log("Failed to connect to DB");
+    }
   }
 
   private listenServer() {
